@@ -192,38 +192,132 @@
     );
   }
 
-  function Projects(){
-    useReveal();
-    useEffect(()=> setMeta('Projects — Nimesh Madusanka', 'Personal and academic projects including Vehicle Marketplace, Hospital Management, UI/UX designs.'), []);
-    // Example data - replace thumbnails and links with real ones
-    const projects = [
-      {title:'Vehicle Marketplace', img:'assets/projects/vehicle-market-th.jpg', desc:'A marketplace for vehicles with filters and user dashboards.', stack:'Next.js • Node.js'},
-      {title:'Hospital Management System', img:'assets/projects/hospital-th.jpg', desc:'JSP based hospital admin & patient records system.', stack:'JSP • MySQL'},
-      {title:'UI/UX Dashboard', img:'assets/projects/dashboard-th.jpg', desc:'Figma dashboard concept for analytics.', stack:'Figma'}
-    ];
-    return e('main',{className:'container'},
-      e('section',{className:'section reveal'},
-        e('h2', null, "Projects"),
-        e('p',{className:'desc'}, "Detailed project cards with live/demo and GitHub links."),
-        e('div',{className:'projects-grid', style:{marginTop:18}},
-          projects.map((p, i)=>
-            e('article',{className:'project', key:i},
-              e('img',{src:p.img, alt:p.title}),
-              e('div',{className:'body'},
-                e('h4', null, p.title),
-                e('p',{className:'stack'}, p.stack),
-                e('p',null, p.desc),
-                e('div',{style:{marginTop:'auto',display:'flex',gap:8}},
-                  e('a',{href:'#',className:'btn'}, "Live Demo"),
-                  e('a',{href:'#',className:'btn secondary'}, "GitHub")
-                )
+ function Projects(){
+  useReveal();
+  useEffect(()=> setMeta('Projects — Nimesh Madusanka', 'Personal and academic projects including Vehicle Marketplace, Hospital Management, UI/UX designs.'), []);
+
+  const [selected, setSelected] = React.useState(null);
+  const [page, setPage] = React.useState(1);
+  const perPage = 12; // 👈 3×4 layout
+
+  const projects = [
+    {title:'Vehicle Marketplace', img:'assets/projects/vehicle-market-th.jpg', desc:'A marketplace for vehicles with filters and user dashboards.', stack:'Next.js • Node.js', preview:'assets/projects/vehicle-preview.mp4', details:'Developed a full marketplace with user dashboard, real-time bidding, and leasing integration.'},
+    {title:'Hospital Management System', img:'assets/projects/hospital-th.jpg', desc:'JSP based hospital admin & patient records system.', stack:'JSP • MySQL', preview:'assets/projects/hospital-preview.jpg', details:'Handles patient records, appointments, doctor schedules, and billing efficiently.'},
+    {title:'UI/UX Dashboard', img:'assets/projects/dashboard-th.jpg', desc:'Figma dashboard concept for analytics.', stack:'Figma', preview:'assets/projects/dashboard-preview.mp4', details:'A modern analytics dashboard design focused on clean data visualization.'},
+    {title:'Portfolio Website', img:'assets/projects/portfolio-th.jpg', desc:'Personal portfolio built using HTML, CSS, and React.', stack:'React.js • TailwindCSS', preview:'assets/projects/portfolio-preview.jpg', details:'Showcases skills, contact info, and projects in a modern layout.'},
+    {title:'Student Management System', img:'assets/projects/student-th.jpg', desc:'Web app for student records management.', stack:'PHP • MySQL', preview:'assets/projects/student-preview.jpg', details:'Used by schools to manage student data, attendance, and grades.'},
+    {title:'E-commerce App', img:'assets/projects/ecommerce-th.jpg', desc:'Online shopping platform with cart system.', stack:'React.js • Node.js', preview:'assets/projects/ecommerce-preview.mp4', details:'Full e-commerce app with payment gateway and order tracking.'},
+    {title:'Chat Application', img:'assets/projects/chat-th.jpg', desc:'Real-time chat system with sockets.', stack:'React.js • Socket.io', preview:'assets/projects/chat-preview.mp4', details:'Supports private and group chats with media sharing.'},
+    {title:'Weather App', img:'assets/projects/weather-th.jpg', desc:'Displays real-time weather data.', stack:'React.js • OpenWeather API', preview:'assets/projects/weather-preview.jpg', details:'Fetches and displays accurate weather information globally.'},
+    {title:'Task Manager', img:'assets/projects/task-th.jpg', desc:'Organize tasks and deadlines efficiently.', stack:'Vue.js • Firebase', preview:'assets/projects/task-preview.jpg', details:'Productivity app to manage daily tasks and reminders.'},
+    {title:'Blog Platform', img:'assets/projects/blog-th.jpg', desc:'Simple blogging system.', stack:'Node.js • Express', preview:'assets/projects/blog-preview.jpg', details:'Users can write, edit, and publish blogs with markdown support.'},
+    {title:'Inventory Management', img:'assets/projects/inventory-th.jpg', desc:'Manages stock and orders.', stack:'Laravel • MySQL', preview:'assets/projects/inventory-preview.jpg', details:'For shops to monitor products, stock levels, and suppliers.'},
+    {title:'Finance Tracker', img:'assets/projects/finance-th.jpg', desc:'Track income and expenses visually.', stack:'React.js • Chart.js', preview:'assets/projects/finance-preview.jpg', details:'Includes graphs for better financial planning.'},
+    {title:'Travel Booking App', img:'assets/projects/travel-th.jpg', desc:'Book trips and hotels easily.', stack:'Next.js • MongoDB', preview:'assets/projects/travel-preview.mp4', details:'Allows users to plan vacations with interactive maps.'},
+    {title:'Online Exam Portal', img:'assets/projects/exam-th.jpg', desc:'Conduct and evaluate exams online.', stack:'Spring Boot • MySQL', preview:'assets/projects/exam-preview.jpg', details:'Auto-evaluation and instant result generation.'},
+    {title:'Restaurant Ordering System', img:'assets/projects/restaurant-th.jpg', desc:'Online food ordering app.', stack:'Django • SQLite', preview:'assets/projects/restaurant-preview.jpg', details:'Enables online menu viewing and order tracking.'},
+    {title:'Portfolio V2', img:'assets/projects/portfolio2-th.jpg', desc:'Next version of personal portfolio.', stack:'React • TailwindCSS', preview:'assets/projects/portfolio2-preview.jpg', details:'Enhanced animations, dark mode, and SEO optimized.'},
+  ];
+
+  const totalPages = Math.ceil(projects.length / perPage);
+  const startIndex = (page - 1) * perPage;
+  const currentProjects = projects.slice(startIndex, startIndex + perPage);
+
+  return e('main',{className:'container'},
+    e('section',{className:'section reveal'},
+      e('h2', null, "Projects"),
+      e('p',{className:'desc'}, "Explore my personal and academic projects. Click 'View Project' for full details."),
+
+      // 🔹 Project Grid (3×4 layout)
+      e('div',{className:'projects-grid', style:{
+        marginTop:18,
+        display:'grid',
+        gridTemplateColumns:'repeat(3, 1fr)', // 👈 3 columns only
+        gap:'22px'
+      }},
+        currentProjects.map((p, i)=>
+          e('article',{className:'project', key:i, style:{
+            background:'#111',borderRadius:'10px',overflow:'hidden',
+            display:'flex',flexDirection:'column',justifyContent:'space-between',
+            boxShadow:'0 4px 12px rgba(0,0,0,0.3)'
+          }},
+            e('img',{src:p.img, alt:p.title, style:{width:'100%',height:'180px',objectFit:'cover'}}),
+            e('div',{className:'body', style:{padding:'14px',display:'flex',flexDirection:'column',gap:'6px'}},
+              e('h4', {style:{fontSize:'1.1rem',color:'#fff'}}, p.title),
+              e('p',{className:'stack',style:{fontSize:'0.85rem',color:'#8cf'}}, p.stack),
+              e('p',{style:{fontSize:'0.9rem',color:'#ccc'}}, p.desc),
+              e('div',{style:{marginTop:'auto',display:'flex',gap:8,justifyContent:'space-between'}},
+                e('button',{className:'btn', onClick:()=> setSelected(p)}, "View Project"),
+                e('a',{href:'#',className:'btn secondary'}, "GitHub")
               )
             )
           )
         )
+      ),
+
+      // 🔹 Pagination Buttons
+      e('div',{style:{marginTop:24, display:'flex', justifyContent:'center', gap:12}},
+        e('button',{
+          className:'btn secondary',
+          disabled: page === 1,
+          onClick:()=> setPage(page - 1)
+        },"← Previous"),
+        e('span',null,`Page ${page} of ${totalPages}`),
+        e('button',{
+          className:'btn',
+          disabled: page === totalPages,
+          onClick:()=> setPage(page + 1)
+        },"Next →")
+      ),
+
+      // 🔹 Modal Preview
+      selected && e('div',{
+        className:'preview-modal',
+        style:{
+          position:'fixed',
+          top:0,left:0,right:0,bottom:0,
+          background:'rgba(0,0,0,0.85)',
+          display:'flex',
+          justifyContent:'center',
+          alignItems:'center',
+          zIndex:1000,
+          padding:'20px'
+        },
+        onClick:()=> setSelected(null)
+      },
+        e('div',{
+          className:'preview-content',
+          style:{
+            background:'#111',
+            borderRadius:'12px',
+            padding:'20px',
+            maxWidth:'850px',
+            width:'100%',
+            textAlign:'center',
+            position:'relative'
+          },
+          onClick:(e)=>e.stopPropagation()
+        },
+          e('button',{
+            onClick:()=> setSelected(null),
+            style:{
+              position:'absolute',top:10,right:10,
+              background:'transparent',border:'none',
+              color:'#fff',fontSize:'1.5rem',cursor:'pointer'
+            }
+          },'✕'),
+          e('h3',null, selected.title),
+          selected.preview.endsWith('.mp4')
+            ? e('video',{src:selected.preview, controls:true, style:{width:'100%',borderRadius:'8px',marginTop:'12px'}})
+            : e('img',{src:selected.preview, alt:selected.title, style:{width:'100%',borderRadius:'8px',marginTop:'12px'}}),
+          e('p',{style:{marginTop:'10px'}}, selected.desc),
+          e('p',{style:{marginTop:'8px',color:'#bbb',fontSize:'0.9rem'}}, selected.details)
+        )
       )
-    );
-  }
+    )
+  );
+}
+
 
   function Education(){
     useReveal();
