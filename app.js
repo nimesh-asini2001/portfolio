@@ -212,6 +212,17 @@
     {title:'Task Manager', img:'assets/projects/task-th.jpg', desc:'Organize tasks and deadlines efficiently.', stack:'Vue.js • Firebase', preview:'assets/projects/task-preview.jpg', details:'Productivity app to manage daily tasks and reminders.'},
     {title:'Blog Platform', img:'assets/projects/blog-th.jpg', desc:'Simple blogging system.', stack:'Node.js • Express', preview:'assets/projects/blog-preview.jpg', details:'Users can write, edit, and publish blogs with markdown support.'},
     {title:'Inventory Management', img:'assets/projects/inventory-th.jpg', desc:'Manages stock and orders.', stack:'Laravel • MySQL', preview:'assets/projects/inventory-preview.jpg', details:'For shops to monitor products, stock levels, and suppliers.'},
+    {title:'Vehicle Marketplace', img:'assets/projects/vehicle-market-th.jpg', desc:'A marketplace for vehicles with filters and user dashboards.', stack:'Next.js • Node.js', preview:'assets/projects/vehicle-preview.mp4', details:'Developed a full marketplace with user dashboard, real-time bidding, and leasing integration.'},
+    {title:'Hospital Management System', img:'assets/projects/hospital-th.jpg', desc:'JSP based hospital admin & patient records system.', stack:'JSP • MySQL', preview:'assets/projects/hospital-preview.jpg', details:'Handles patient records, appointments, doctor schedules, and billing efficiently.'},
+    {title:'UI/UX Dashboard', img:'assets/projects/dashboard-th.jpg', desc:'Figma dashboard concept for analytics.', stack:'Figma', preview:'assets/projects/dashboard-preview.mp4', details:'A modern analytics dashboard design focused on clean data visualization.'},
+    {title:'Portfolio Website', img:'assets/projects/portfolio-th.jpg', desc:'Personal portfolio built using HTML, CSS, and React.', stack:'React.js • TailwindCSS', preview:'assets/projects/portfolio-preview.jpg', details:'Showcases skills, contact info, and projects in a modern layout.'},
+    {title:'Student Management System', img:'assets/projects/student-th.jpg', desc:'Web app for student records management.', stack:'PHP • MySQL', preview:'assets/projects/student-preview.jpg', details:'Used by schools to manage student data, attendance, and grades.'},
+    {title:'E-commerce App', img:'assets/projects/ecommerce-th.jpg', desc:'Online shopping platform with cart system.', stack:'React.js • Node.js', preview:'assets/projects/ecommerce-preview.mp4', details:'Full e-commerce app with payment gateway and order tracking.'},
+    {title:'Chat Application', img:'assets/projects/chat-th.jpg', desc:'Real-time chat system with sockets.', stack:'React.js • Socket.io', preview:'assets/projects/chat-preview.mp4', details:'Supports private and group chats with media sharing.'},
+    {title:'Weather App', img:'assets/projects/weather-th.jpg', desc:'Displays real-time weather data.', stack:'React.js • OpenWeather API', preview:'assets/projects/weather-preview.jpg', details:'Fetches and displays accurate weather information globally.'},
+    {title:'Task Manager', img:'assets/projects/task-th.jpg', desc:'Organize tasks and deadlines efficiently.', stack:'Vue.js • Firebase', preview:'assets/projects/task-preview.jpg', details:'Productivity app to manage daily tasks and reminders.'},
+    {title:'Blog Platform', img:'assets/projects/blog-th.jpg', desc:'Simple blogging system.', stack:'Node.js • Express', preview:'assets/projects/blog-preview.jpg', details:'Users can write, edit, and publish blogs with markdown support.'},
+    {title:'Inventory Management', img:'assets/projects/inventory-th.jpg', desc:'Manages stock and orders.', stack:'Laravel • MySQL', preview:'assets/projects/inventory-preview.jpg', details:'For shops to monitor products, stock levels, and suppliers.'},
     {title:'Finance Tracker', img:'assets/projects/finance-th.jpg', desc:'Track income and expenses visually.', stack:'React.js • Chart.js', preview:'assets/projects/finance-preview.jpg', details:'Includes graphs for better financial planning.'},
     {title:'Travel Booking App', img:'assets/projects/travel-th.jpg', desc:'Book trips and hotels easily.', stack:'Next.js • MongoDB', preview:'assets/projects/travel-preview.mp4', details:'Allows users to plan vacations with interactive maps.'},
     {title:'Online Exam Portal', img:'assets/projects/exam-th.jpg', desc:'Conduct and evaluate exams online.', stack:'Spring Boot • MySQL', preview:'assets/projects/exam-preview.jpg', details:'Auto-evaluation and instant result generation.'},
@@ -319,25 +330,148 @@
 }
 
 
-  function Education(){
-    useReveal();
-    useEffect(()=> setMeta('Education — Nimesh Madusanka', 'BSc (Hons) in Management Information Systems — Year 2.'), []);
-    return e('main',{className:'container'},
-      e('section',{className:'section reveal'},
-        e('h2', null, "Education"),
-        e('div',{className:'list', style:{marginTop:12}},
-          e('div',{className:'item'},
-            e('h4', null, "BSc (Hons) in Management Information Systems — [University Name]"),
-            e('p',{style:{color:'var(--muted)'}}, "Year 2 (Current)")
-          ),
-          e('div',{className:'item'},
-            e('h4', null, "Certifications"),
-            e('p',{style:{color:'var(--muted)'}}, "Full-Stack Bootcamp (Udemy), React Essentials (Coursera)")
+  function Education() {
+  useReveal();
+  useEffect(() => 
+    setMeta('Education — Nimesh Madusanka', 'BSc (Hons) in Management Information Systems — Year 2.'), 
+  []);
+
+  const [showCert, setShowCert] = React.useState(false);
+
+  // Close modal function
+  const closeModal = () => {
+    setShowCert(false);
+    // Smooth scroll back to top of Education section after close
+    setTimeout(() => {
+      const section = document.querySelector('.section.reveal');
+      if (section) section.scrollIntoView({ behavior: 'smooth' });
+    }, 300);
+  };
+
+  return e('main', { className: 'container' },
+    e('section', { className: 'section reveal' },
+      e('h2', null, "Education"),
+
+      // === Education List ===
+      e('div', { className: 'list', style: { marginTop: 12 } },
+
+        // ---- Degree ----
+        e('div', { className: 'item' },
+          e('div', { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' } },
+            e('div', null,
+              e('h4', null, "BSc (Hons) in Management Information Systems — [University Name]"),
+              e('p', { style: { color: 'var(--muted)' } }, "Year 2 (Current)")
+            )
+            // Degree button removed
+          )
+        ),
+
+        // ---- Certifications ----
+        e('div', { className: 'item', style: { marginTop: 16 } },
+          e('div', { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' } },
+            e('div', null,
+              e('h4', null, "Certifications"),
+              e('p', { style: { color: 'var(--muted)' } }, 
+                "Full-Stack Bootcamp (Udemy), React Essentials (Coursera)"
+              )
+            ),
+            e('button', {
+              onClick: () => setShowCert(true),
+              style: {
+                background: 'var(--accent)',
+                color: '#fff',
+                border: 'none',
+                padding: '6px 12px',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                transition: 'background 0.3s',
+              },
+              onMouseEnter: (e) => e.target.style.background = '#0097e6',
+              onMouseLeave: (e) => e.target.style.background = 'var(--accent)'
+            }, "View Certificate")
           )
         )
+      ),
+
+      // === Full-Screen Image Modal ===
+      showCert && e('div', {
+        style: {
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100vw',
+          height: '100vh',
+          backgroundColor: 'rgba(0, 0, 0, 0.95)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          zIndex: 9999,
+          animation: 'fadeIn 0.3s ease-in-out',
+        },
+        onClick: closeModal
+      },
+        e('div', {
+          style: {
+            position: 'relative',
+            maxWidth: '95%',
+            maxHeight: '95%',
+            animation: 'scaleIn 0.4s ease-in-out'
+          },
+          onClick: (e) => e.stopPropagation()
+        },
+          // Close button ✕
+          e('button', {
+            onClick: closeModal,
+            style: {
+              position: 'absolute',
+              top: '-40px',
+              right: '0',
+              background: 'var(--accent)',
+              color: '#fff',
+              border: 'none',
+              padding: '6px 12px',
+              borderRadius: '50%',
+              fontSize: '18px',
+              cursor: 'pointer',
+              transition: 'background 0.3s',
+              boxShadow: '0 0 10px rgba(0,0,0,0.5)'
+            },
+            onMouseEnter: (e) => e.target.style.background = '#0097e6',
+            onMouseLeave: (e) => e.target.style.background = 'var(--accent)'
+          }, '✕'),
+
+          // Certificate image
+          e('img', {
+            src: '/images/certificate-sample.jpg', // <-- Replace with your real image path
+            alt: 'Certificate',
+            style: {
+              width: '100%',
+              height: 'auto',
+              borderRadius: '12px',
+              boxShadow: '0 0 25px rgba(255,255,255,0.2)',
+              objectFit: 'contain'
+            }
+          })
+        )
       )
-    );
-  }
+    )
+  );
+}
+
+// === Add smooth animation styles globally ===
+const style = document.createElement('style');
+style.innerHTML = `
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes scaleIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+`;
+document.head.appendChild(style);
+
 
   function Achievements(){
     useReveal();
@@ -357,36 +491,52 @@
     );
   }
 
-  function Contact(){
-    useReveal();
-    useEffect(()=> setMeta('Contact — Nimesh Madusanka', 'Contact Nimesh via email or social links. Use the contact form powered by Formspree.'), []);
-    return e('main',{className:'container'},
-      e('section',{className:'section reveal'},
-        e('h2', null, "Contact"),
-        e('p',{className:'desc'}, "Got a project or question? Reach out — or use the contact form below."),
-        e('div',{style:{display:'grid',gridTemplateColumns:'1fr 380px',gap:24,marginTop:18}},
-          e('div',null,
-            e('form',{action:'https://formspree.io/f/yourFormID', method:'POST', className:'form'}, // replace with your Formspree endpoint
-              e('input',{name:'name', className:'input', placeholder:'Your name', required:true}),
-              e('input',{name:'email', type:'email', className:'input', placeholder:'Your email', required:true}),
-              e('input',{name:'subject', className:'input', placeholder:'Subject', className2:'input'}),
-              e('textarea',{name:'message', rows:6, className:'input full', placeholder:'Message', required:true}),
-              e('button',{className:'btn', type:'submit'}, "Send Message")
-            )
-          ),
-          e('aside',{className:'profile-card'},
-            e('h4', null, "Contact Info"),
-            e('p',{style:{color:'var(--muted)'}}, "Email: "),
-            e('a',{href:'mailto:nimeshmadusanka@gmail.com'}, "nimeshmadusanka@gmail.com"),
-            e('div',{style:{marginTop:12,display:'flex',gap:8,justifyContent:'center'}},
-              e('a',{href:'https://linkedin.com/in/yourprofile', target:'_blank', rel:'noopener noreferrer', className:'btn secondary'}, "LinkedIn"),
-              e('a',{href:'https://github.com/yourprofile', target:'_blank', rel:'noopener noreferrer', className:'btn secondary'}, "GitHub")
-            )
-          )
+  function Contact() {
+  useReveal();
+  useEffect(() => 
+    setMeta(
+      'Contact — Nimesh Madusanka', 
+      'View Nimesh Madusanka personal contact information, profile photo, and social links for portfolio purposes.'
+    ), 
+  []);
+
+  return e('main', { className: 'container', style: { padding: '60px 20px', maxWidth: '600px', margin: '0 auto' } },
+    e('section', { className: 'section reveal', style: { display: 'flex', flexDirection: 'column', gap: '32px', alignItems: 'center' } },
+      e('h2', { style: { textAlign: 'center' } }, "Contact Info"),
+      e('p', { style: { textAlign: 'center', color: 'var(--muted)', fontSize: '16px' } }, 
+        "Reach out via email, phone, or social links below."
+      ),
+
+      // --- Profile Card with Photo ---
+      e('aside', { className: 'profile-card', style: { background: 'var(--card)', padding: '32px', borderRadius: '16px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px', textAlign: 'center', width: '100%', boxShadow: '0 6px 25px rgba(0,0,0,0.15)' } },
+        
+        // Profile Photo
+        e('img', { 
+          src: '/images/profile-photo.jpg', // <-- replace with your actual photo path
+          alt: 'Nimesh Madusanka', 
+          style: { width: '120px', height: '120px', borderRadius: '50%', objectFit: 'cover', boxShadow: '0 4px 15px rgba(0,0,0,0.2)' } 
+        }),
+
+        // Personal Info
+        e('h3', { style: { margin: 0 } }, "Nimesh Madusanka"),
+        e('p', { style: { color: 'var(--muted)', margin: '4px 0' } }, "Age: 21"),
+        e('p', { style: { color: 'var(--muted)', margin: '4px 0' } }, "Phone: +94 77 123 4567"),
+        e('p', { style: { color: 'var(--muted)', margin: '4px 0' } }, "Email:"),
+        e('a', { href: 'mailto:nimeshmadusanka@gmail.com', style: { color: 'var(--accent)', textDecoration: 'none', fontWeight: '500', fontSize: '16px' } }, "nimeshmadusanka@gmail.com"),
+
+        // Social Links
+        e('div', { style: { display: 'flex', gap: '12px', marginTop: '16px', justifyContent: 'center' } },
+          e('a', { href: 'https://linkedin.com/in/yourprofile', target: '_blank', rel: 'noopener noreferrer', style: { padding: '10px 16px', borderRadius: '8px', background: 'var(--accent)', color: '#fff', textDecoration: 'none', transition: 'background 0.3s', textAlign: 'center' }, onMouseEnter: (e) => e.target.style.background = '#0097e6', onMouseLeave: (e) => e.target.style.background = 'var(--accent)' }, "LinkedIn"),
+          e('a', { href: 'https://github.com/yourprofile', target: '_blank', rel: 'noopener noreferrer', style: { padding: '10px 16px', borderRadius: '8px', background: 'var(--accent)', color: '#fff', textDecoration: 'none', transition: 'background 0.3s', textAlign: 'center' }, onMouseEnter: (e) => e.target.style.background = '#0097e6', onMouseLeave: (e) => e.target.style.background = 'var(--accent)' }, "GitHub"),
+          e('a', { href: 'https://facebook.com/yourprofile', target: '_blank', rel: 'noopener noreferrer', style: { padding: '10px 16px', borderRadius: '8px', background: '#3b5998', color: '#fff', textDecoration: 'none', transition: 'background 0.3s', textAlign: 'center' }, onMouseEnter: (e) => e.target.style.background = '#2d4373', onMouseLeave: (e) => e.target.style.background = '#3b5998' }, "Facebook"),
+          e('a', { href: 'https://instagram.com/yourprofile', target: '_blank', rel: 'noopener noreferrer', style: { padding: '10px 16px', borderRadius: '8px', background: '#e4405f', color: '#fff', textDecoration: 'none', transition: 'background 0.3s', textAlign: 'center' }, onMouseEnter: (e) => e.target.style.background = '#c1355a', onMouseLeave: (e) => e.target.style.background = '#e4405f' }, "Instagram")
         )
       )
-    );
-  }
+    )
+  );
+}
+
+
 
   /* ----- Router Render Switch ----- */
   function App(){
