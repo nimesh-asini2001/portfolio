@@ -65,7 +65,7 @@
     ];
     return e('nav', null,
       e('div',{className:'nav-inner'},
-        e('div',{className:'brand'}, e('span',{className:'dot'}), 'Nimesh'),
+        e('div',{className:'brand'}, e('span',{className:'dot'}), 'Nimesh (Nima🙂)'),
         e('div',{className:'nav-right', style:{display:'flex',alignItems:'center',gap:12}},
           e('div',{className:'nav-links'}, links.map(l =>
             e('a',{
@@ -87,79 +87,154 @@
   /* ----- Components for sections ----- */
 
   function Home(){
-    useReveal();
-    useEffect(()=> setMeta('Nimesh Madusanka — Web Developer & Designer', 'Hi, I’m Nimesh Madusanka — a passionate Web Developer, Designer, and MIS Undergraduate from Sri Lanka. I create impactful web experiences using modern technologies.'), []);
-    return e('main', {className:'container'},
-      e('section',{className:'hero section reveal'},
-        e('div',{className:'intro'},
-          e('h1', null, "Hi, I’m Nimesh Madusanka"),
-          e('p', {className:'lead'}, "A passionate Web Developer, Designer, and MIS Undergraduate from Sri Lanka. I create impactful web experiences using modern technologies."),
-          e('div',{className:'cta-row'},
-            e('a',{href:'#/projects', className:'btn'}, "View My Work"),
-            e('a',{href:'#/contact', className:'btn secondary'}, "Contact Me")
-          ),
-          e('p',{style:{marginTop:18,color:'var(--muted)'}}, "Currently pursuing BSc (Hons) in Management Information Systems.")
+  useReveal();
+  useEffect(()=> 
+    setMeta(
+      'Nimesh Madusanka — Web Developer & Designer', 
+      'Hi, I’m Nimesh Madusanka — a passionate Web Developer, Designer, and MIS Undergraduate from Sri Lanka. I create impactful web experiences using modern technologies.'
+    ), 
+  []);
+
+  return e('main', {className:'container'},
+    e('section',{className:'hero section reveal'},
+      e('div',{className:'intro'},
+        e('h1', null, "Hi, I’m Nimesh Madusanka"),
+        e('p', {className:'lead'}, 
+          "A passionate Web Developer, Designer, and MIS Undergraduate from Sri Lanka. I create impactful web experiences using modern technologies."
         ),
-        e('aside',{className:'profile-card'},
-          e('img',{src:'assets/profile.jpg', alt:'Nimesh Madusanka', className:'profile-photo'}),
-          e('h3', null, "Nimesh Madusanka"),
-          e('p',{style:{color:'var(--muted)'}}, "Web Developer • UI/UX • MIS Undergraduate"),
-          e('a',{href:'assets/CV_Nimesh_Madusanka.pdf', className:'btn', download:true}, e('i',{className:'fa fa-download'}), " Download CV")
+        e('div',{className:'cta-row'},
+          e('a',{href:'#/projects', className:'btn'}, "View My Work"),
+          e('a',{href:'#/contact', className:'btn secondary'}, "Contact Me")
+        ),
+        e('p',{style:{marginTop:18,color:'var(--muted)'}}, 
+          "Currently pursuing BSc (Hons) in Management Information Systems."
         )
       ),
 
-      e('section',{className:'section reveal'},
-        e('h2', null, "Featured Projects"),
-        e('p',{className:'desc'}, "Selected projects that showcase web development and UI/UX skills."),
-        e('div',{className:'projects-grid'},
-          /* Sample project card */
-          e('article',{className:'project'},
-            e('img',{src:'assets/projects/vehicle-market-th.jpg', alt:'Vehicle Marketplace'}),
-            e('div',{className:'body'},
-              e('h4', null, "Vehicle Marketplace"),
-              e('p',{className:'stack'}, "Next.js • Node.js • React (demo placeholder)"),
-              e('div',{style:{marginTop:'auto',display:'flex',gap:8}},
-                e('a',{href:'#',className:'btn'}, "Live Demo"),
-                e('a',{href:'#',className:'btn secondary'}, "GitHub")
-              )
+      // --- Profile Card ---
+      e('aside',{className:'profile-card'},
+        e('img',{
+          src:'assets/profile.jpg', 
+          alt:'Nimesh Madusanka', 
+          className:'profile-photo',
+          style:{
+            width:'200px',       // slightly larger
+            height:'200px',
+            borderRadius:'50%',  // perfect circular
+            objectFit:'cover',
+            boxShadow:'0 6px 18px rgba(0,0,0,0.25)', // soft clean shadow
+            marginBottom:'14px'
+          }
+        }),
+        e('h3', null, "Nimesh Madusanka"),
+        e('p',{style:{color:'var(--muted)', marginBottom:12}}, 
+          "Web Developer • UI/UX • MIS Undergraduate"
+        ),
+        e('a',{
+          href:'assets/CV_Nimesh_Madusanka.pdf',
+          className:'btn',
+          target:'_blank',
+          rel:'noopener noreferrer'
+        }, 
+          e('i',{className:'fa fa-eye', style:{marginRight:6}}), 
+          "View CV"
+        )
+      )
+    ),
+
+    // --- Featured Projects Section ---
+    e('section',{className:'section reveal'},
+      e('h2', null, "Featured Projects"),
+      e('p',{className:'desc'}, 
+        "Selected projects that showcase web development and UI/UX skills."
+      ),
+      e('div',{className:'projects-grid'},
+        e('article',{className:'project'},
+          e('img',{src:'assets/projects/vehicle-market-th.jpg', alt:'Vehicle Marketplace'}),
+          e('div',{className:'body'},
+            e('h4', null, "Vehicle Marketplace"),
+            e('p',{className:'stack'}, "Next.js • Node.js • React (demo placeholder)"),
+            e('div',{style:{marginTop:'auto',display:'flex',gap:8}},
+              e('a',{href:'#',className:'btn'}, "Live Demo"),
+              e('a',{href:'#',className:'btn secondary'}, "GitHub")
             )
-          ),
-          e('article',{className:'project'},
-            e('img',{src:'assets/projects/hospital-th.jpg', alt:'Hospital System'}),
-            e('div',{className:'body'},
-              e('h4', null, "Hospital Management System"),
-              e('p',{className:'stack'}, "JSP • MySQL"),
-              e('div',{style:{marginTop:'auto',display:'flex',gap:8}},
-                e('a',{href:'#',className:'btn'}, "Live Demo"),
-                e('a',{href:'#',className:'btn secondary'}, "GitHub")
-              )
+          )
+        ),
+        e('article',{className:'project'},
+          e('img',{src:'assets/projects/hospital-th.jpg', alt:'Hospital System'}),
+          e('div',{className:'body'},
+            e('h4', null, "Hospital Management System"),
+            e('p',{className:'stack'}, "JSP • MySQL"),
+            e('div',{style:{marginTop:'auto',display:'flex',gap:8}},
+              e('a',{href:'#',className:'btn'}, "Live Demo"),
+              e('a',{href:'#',className:'btn secondary'}, "GitHub")
             )
           )
         )
       )
-    );
-  }
+    )
+  );
+}
 
   function About(){
-    useReveal();
-    useEffect(()=> setMeta('About — Nimesh Madusanka', 'Personal bio and education summary of Nimesh Madusanka.'), []);
-    return e('main',{className:'container'},
-      e('section',{className:'section reveal'},
-        e('h2', null, "About Me"),
-        e('p',{className:'desc'}, "I’m Nimesh — a web developer and designer currently pursuing a BSc (Hons) in Management Information Systems. I enjoy building accessible, performant web apps and designing user-friendly interfaces."),
-        e('div',{style:{display:'grid',gridTemplateColumns:'1fr 320px',gap:24,marginTop:18}},
-          e('div',null,
-            e('h3', null, "Education & Goals"),
-            e('p', null, "Currently in Year 2 of BSc (Hons) MIS. My goal is to become a full-stack developer and product-oriented designer who builds delightful user experiences.")
-          ),
-          e('aside',{className:'profile-card'},
-            e('img',{src:'assets/profile.jpg', alt:'Profile', className:'profile-photo'}),
-            e('a',{href:'assets/CV_Nimesh_Madusanka.pdf', className:'btn', download:true}, e('i',{className:'fa fa-download'}), " Download CV")
+  useReveal();
+  useEffect(()=> 
+    setMeta(
+      'About — Nimesh Madusanka', 
+      'Personal bio and education summary of Nimesh Madusanka.'
+    ), 
+  []);
+
+  return e('main',{className:'container'},
+    e('section',{className:'section reveal'},
+      e('h2', null, "About Me"),
+      e('p',{className:'desc'}, 
+        "I’m Nimesh — a web developer and designer currently pursuing a BSc (Hons) in Management Information Systems. I enjoy building accessible, performant web apps and designing user-friendly interfaces."
+      ),
+      e('div',{
+        style:{
+          display:'grid',
+          gridTemplateColumns:'1fr 320px',
+          gap:24,
+          marginTop:18,
+          alignItems:'center'
+        }
+      },
+        e('div',null,
+          e('h3', null, "Education & Goals"),
+          e('p', null, 
+            "Currently in Year 2 of BSc (Hons) MIS. My goal is to become a full-stack developer and product-oriented designer who builds delightful user experiences."
+          )
+        ),
+        e('aside',{className:'profile-card', style:{textAlign:'center'}},
+          e('img',{
+            src:'assets/profile.jpg', 
+            alt:'Profile', 
+            className:'profile-photo',
+            style:{
+              width:'180px',
+              height:'180px',
+              borderRadius:'50%',
+              objectFit:'cover',
+              boxShadow:'0 4px 15px rgba(0,0,0,0.2)',
+              marginBottom:'12px'
+            }
+          }),
+          e('a',{
+            href:'assets/CV_Nimesh_Madusanka.pdf',
+            className:'btn',
+            target:'_blank',
+            rel:'noopener noreferrer'
+          }, 
+            e('i',{className:'fa fa-eye', style:{marginRight:6}}),
+            "View CV"
           )
         )
       )
-    );
-  }
+    )
+  );
+}
+
 
   function Skills(){
     useReveal();
@@ -537,48 +612,57 @@ document.head.appendChild(style);
 }
 
 
-
+ 
   /* ----- Router Render Switch ----- */
-  function App(){
-    const route = useHashRoute();
-    const [theme, setTheme] = useTheme();
+  function App() {
+  const route = useHashRoute();
 
-    useEffect(()=>{
-      // set document title/meta based on route
-      switch(route){
-        case "#/about": setMeta('About — Nimesh Madusanka','About Nimesh Madusanka'); break;
-        case "#/skills": setMeta('Skills — Nimesh Madusanka','Skill list'); break;
-        case "#/projects": setMeta('Projects — Nimesh Madusanka','Projects details'); break;
-        case "#/education": setMeta('Education — Nimesh Madusanka','Education & certifications'); break;
-        case "#/achievements": setMeta('Achievements — Nimesh Madusanka','Achievements & recognitions'); break;
-        case "#/contact": setMeta('Contact — Nimesh Madusanka','Contact details and form'); break;
-        default: setMeta('Nimesh Madusanka — Web Developer & Designer','Portfolio of Nimesh Madusanka'); break;
-      }
-    }, [route]);
+  // Always light theme
+  useEffect(() => {
+    document.documentElement.style.setProperty('--bg', '#f6f9ff');
+    document.documentElement.style.setProperty('--card', '#ffffff');
+    document.documentElement.style.setProperty('--muted', '#394c59');
+    document.documentElement.style.setProperty('--accent', '#0066cc');
+  }, []);
 
-    // simple scroll to top when route changes
-    useEffect(()=> window.scrollTo({top:0, behavior:'smooth'}), [route]);
+  // Update document title/meta based on route
+  useEffect(() => {
+    switch(route) {
+      case "#/about": setMeta('About — Nimesh Madusanka','About Nimesh Madusanka'); break;
+      case "#/skills": setMeta('Skills — Nimesh Madusanka','Skill list'); break;
+      case "#/projects": setMeta('Projects — Nimesh Madusanka','Projects details'); break;
+      case "#/education": setMeta('Education — Nimesh Madusanka','Education & certifications'); break;
+      case "#/achievements": setMeta('Achievements — Nimesh Madusanka','Achievements & recognitions'); break;
+      case "#/contact": setMeta('Contact — Nimesh Madusanka','Contact details and form'); break;
+      default: setMeta('Nimesh Madusanka — Web Developer & Designer','Portfolio of Nimesh Madusanka'); break;
+    }
+  }, [route]);
 
-    const page = (()=>{
-      switch(route){
-        case "#/about": return e(About);
-        case "#/skills": return e(Skills);
-        case "#/projects": return e(Projects);
-        case "#/education": return e(Education);
-        case "#/achievements": return e(Achievements);
-        case "#/contact": return e(Contact);
-        default: return e(Home);
-      }
-    })();
+  // Scroll to top on route change
+  useEffect(() => window.scrollTo({ top: 0, behavior: 'smooth' }), [route]);
 
-    return e(React.Fragment, null,
-      e(Nav, {route, onToggleTheme:setTheme, theme}),
-      page,
-      e('footer', null, "© " + (new Date()).getFullYear() + " Nimesh Madusanka — Built with HTML, CSS & React. Hosted on GitHub Pages.")
-    );
-  }
+  // Render the page component based on route
+  const page = (() => {
+    switch(route) {
+      case "#/about": return e(About);
+      case "#/skills": return e(Skills);
+      case "#/projects": return e(Projects);
+      case "#/education": return e(Education);
+      case "#/achievements": return e(Achievements);
+      case "#/contact": return e(Contact);
+      default: return e(Home);
+    }
+  })();
 
-  /* ----- Render ----- */
-  ReactDOM.createRoot(document.getElementById('root')).render(e(App));
+  return e(React.Fragment, null,
+    // Pass a dummy theme toggle since we don't change theme
+    e(Nav, { route, onToggleTheme: () => {}, theme: 'light' }),
+    page,
+    e('footer', null, "© " + (new Date()).getFullYear() + " Nimesh Madusanka — Built with HTML, CSS & React. Hosted on GitHub Pages.")
+  );
+}
+
+/* ----- Render ----- */
+ReactDOM.createRoot(document.getElementById('root')).render(e(App));
 
 })();
